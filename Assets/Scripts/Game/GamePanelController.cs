@@ -98,9 +98,9 @@ public class GamePanelController : MonoBehaviour
 
     private void NewGame()
     {
-        for (int i = 0; i < _xSize; ++i)
+        for (int i = 0; i < GamePanelManager.Instance.NumberTable.Length; ++i)
         {
-            for (int j = 0; j < _ySize; ++j)
+            for (int j = 0; j < GamePanelManager.Instance.NumberTable[i].Length; ++j)
             {
                 if (GamePanelManager.Instance.NumberTable[i][j] != null)
                 {

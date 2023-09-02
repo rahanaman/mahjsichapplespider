@@ -50,9 +50,10 @@ public class CommandPanelController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Tab))
         {
             OnClickCommandPanelButton();
-            Debug.Log(_commandInput.IsActive());
+           
         }
-        if(_isPanelOn && _commandInputString.Length>0 && Input.GetKeyDown(KeyCode.Return))
+        
+        if (_isPanelOn && _commandInputString.Length>0 && Input.GetKeyDown(KeyCode.Return))
         {
             InvokeCommand();
         }
@@ -111,7 +112,7 @@ public class CommandPanelManager
     private const string PARSE = @"\s\s*";
     private Dictionary<string, Func<string[],bool>> CommandID = new Dictionary<string, Func<string[], bool>>
     {
-        {"/get", GetCommand},
+        {"/set", SetCommand},
         {"/table", TableCommand },
         {"/new", NewCommand }
     };
@@ -163,7 +164,7 @@ public class CommandPanelManager
             return false;
         }
     }
-    private static bool GetCommand(string[] fields) //오류 문구 알아서 넣기
+    private static bool SetCommand(string[] fields) //오류 문구 알아서 넣기
     {
         
         List<int> nums = new List<int>();
