@@ -205,7 +205,7 @@ public class GamePanelController : MonoBehaviour
             }
         }
         
-    }
+    }       
 
     private void SetEnd(int x, int y)
     {
@@ -418,6 +418,8 @@ public class GamePanelManager
             }
             return true;
         }
+
+
         return false;
     }
 
@@ -443,12 +445,17 @@ public class GamePanelManager
             if (ch)
             {
                 change = true;
-                for (int j = 0; j < _xSize; ++j)
+                for(int k = i; k < _ySize-1; ++k)
                 {
-                    NumberTable[j][i] = NumberTable[j][i + 1];
-                    NumberTable[j][i + 1] = null;
-                    if(NumberTable[j][i]!= null) NumberTable[j][i].SetPos(j, i);
+                    for (int j = 0; j < _xSize; ++j)
+                    {
+                        NumberTable[j][k] = NumberTable[j][k + 1];
+                        NumberTable[j][k + 1] = null;
+                        if (NumberTable[j][k] != null) NumberTable[j][k].SetPos(j, k);
+                    
+                    }
                 }
+                
             }
         }
 

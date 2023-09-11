@@ -40,7 +40,7 @@ public class GameEventManager: MonoBehaviour
     public Int2Event SetXY;
     public NumberControllerEvent ClickNumber;
 
-    public void CallOnCreateNum(int num)
+    public void CallOnCreateNum(int num)   
     {
         CreateNum?.Invoke(num);
     }
