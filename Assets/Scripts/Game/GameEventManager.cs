@@ -35,11 +35,18 @@ public class GameEventManager: MonoBehaviour
     public delegate void Int2Event(int num1, int num2);
     public delegate void NumberControllerEvent(NumberController number);
 
+
+    public VoidEvent PlusAction;
     public VoidEvent NewGame;
     public IntEvent CreateNum;
     public Int2Event SetXY;
     public NumberControllerEvent ClickNumber;
 
+
+    public void CallOnPlusAction()
+    {
+        PlusAction?.Invoke();
+    }
     public void CallOnCreateNum(int num)   
     {
         CreateNum?.Invoke(num);

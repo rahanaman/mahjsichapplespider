@@ -33,11 +33,13 @@ public class GamePanelController : MonoBehaviour
             GameEventManager.Instance.SetXY -= SetXY;
             GameEventManager.Instance.NewGame -= NewGame;
             GameEventManager.Instance.ClickNumber -= OnClickNumber;
+            GameEventManager.Instance.PlusAction -= PlusAction;
         }
 
     }
     private void Start()
     {
+        GameEventManager.Instance.PlusAction += PlusAction;
         GameEventManager.Instance.CreateNum += SetNewNumber;
         GameEventManager.Instance.SetXY += SetXY;
         GameEventManager.Instance.NewGame += NewGame;
@@ -155,6 +157,34 @@ public class GamePanelController : MonoBehaviour
             return;
         }
         SetNumber(number, _endX, _endY);
+
+    }
+
+    public void PlusAction()
+    {
+        int tx = 0;
+        int ty = 0;
+        List<int> numList = new List<int>();
+        while (true)
+        {
+            if (GamePanelManager.Instance.NumberTable[tx][ty] != null)
+            {
+                numList.Add(GamePanelManager.Instance.NumberTable[tx][ty].Num);
+            }
+
+            if (tx == _endX && ty == _endY) break;
+            tx++;
+            if (tx >= _xSize)
+            {
+                tx = 0;
+                ty++;
+            }
+
+        }
+        foreach(int num in numList)
+        {
+            SetNewNumber(num);
+        }
 
     }
 
@@ -417,6 +447,35 @@ public class GamePanelManager
                 indexY += delY;
             }
             return true;
+        }
+        if(Math.Abs(num1.Y-num2.Y) == 1)
+        {
+            int tx = num1.Y > num2.Y ? num2.X : num1.X;
+            int gx = num1.Y > num2.Y ? num1.X : num2.X;
+            int ty = num1.Y > num2.Y ? num2.Y : num1.Y;
+            int gy = num1.Y > num2.Y ? num1.Y : num2.Y;
+            
+            
+            while (true)
+            {
+                tx++;
+                if (tx >= _xSize)
+                {
+                    tx = 0;
+                    ty++;
+                    
+                }
+                if(ty >= _ySize)
+                {
+                    return false;
+                }
+                if (tx == gx && ty == gy)
+                {
+                    return true;
+                }
+                if (NumberTable[tx][ty] != null) { return false; }
+
+            }
         }
 
 

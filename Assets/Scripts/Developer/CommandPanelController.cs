@@ -100,10 +100,9 @@ public class CommandPanelController : MonoBehaviour
         string PARSE = @"\s\s*";
        
         var mc = Regex.Split(str, PARSE);
-        Debug.Log(mc.Length);
+        
         foreach (var match in mc)
-        {
-            Debug.Log(match);
+        { 
         }
     }
 }
@@ -114,7 +113,8 @@ public class CommandPanelManager
     {
         {"/set", SetCommand},
         {"/table", TableCommand },
-        {"/new", NewCommand }
+        {"/new", NewCommand },
+        {"/plus", PlusCommand }
     };
 
     private static CommandPanelManager _instance;
@@ -206,6 +206,12 @@ public class CommandPanelManager
     private static bool NewCommand(string[] fields)
     {
         GameEventManager.Instance.CallOnNewGame();
+        return true;
+    }
+
+    private static bool PlusCommand(string[] fields)
+    {
+        GameEventManager.Instance.CallOnPlusAction();
         return true;
     }
 }
